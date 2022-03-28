@@ -46,7 +46,7 @@ class Locale:
         return self._rawString
 
     @property
-    def Country(self) -> str:
+    def CountryName(self) -> str:
         if self._country != "":
             return self._country
         if self._weirdo != "":  # If there's no country, but there is a weirdo, return it.
