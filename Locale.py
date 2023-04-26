@@ -92,7 +92,7 @@ class Locale:
                             "Brazil": "Brazil",
                             "Canada": "Canada",
                             "CANADA": "Canada",
-                            "CA": "canada",
+                            "CA": "Canada",
                             "Denmark": "Denmark",
                             "France": "France",
                             "Germany": "Germany",
