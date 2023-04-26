@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 
-from Log import Log
+from Log import Log, LogError
 
 class Locale:
     def __init__(self, rawtext:str):
@@ -68,9 +68,10 @@ class Locale:
         return self._rawString
     @Value.setter
     # Inputs can be:
-    #   <country>  (e.g., "US", "U.K."
+    #   <country>  (e.g., "US", "U.K.")
     #   <country>:<city>    (e.g., AU: Melbourne)
     #   <State>:<City>      (e.g., IL:Chicago)
+    #   US: <city> <state>    (e.g., US: Van Nuys CA)
     def Value(self, val: str) -> None:  # FanzineIssueInfo
         if val is None:
             val=""
@@ -238,7 +239,11 @@ class Locale:
                 self._state=stup[0]
                 return
 
-        Log(f"ExtractCountry: Can't interpret: '{val}'", isError=True)
+        if val == "Multinational" or val == "Various" or val == "various":
+            Log(f"ExtractCountry: Can't interpret: '{val}' -- ignored")     # Logged, but not error-logged
+            return
+
+        LogError(f"ExtractCountry: Can't interpret: '{val}'")
         self._weirdo=val
 
 
