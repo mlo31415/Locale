@@ -175,7 +175,7 @@ class Locale:
 
         # <Country>:<City> <State>
         # First look to see if it is of the form abc: def XX, where XX is two UC letters.
-        m=re.match("([a-zA-Z\s.]{2,99}):([A-Za-z\s.,-]+) ([A-Z]{2})", val)
+        m=re.match(r"([a-zA-Z\s.]{2,99}):([A-Za-z\s.,-]+) ([A-Z]{2})", val)
         if m:
             self._country=m.groups()[0].strip()
             self._state=m.groups()[2].strip()
@@ -184,7 +184,7 @@ class Locale:
 
         # XX:abc, where XX is two UC letters.
         # XX might be a state, province or country code
-        m=re.match("([A-Z]{2}):([A-Za-z\s.,-]+)", val)
+        m=re.match(r"([A-Z]{2}):([A-Za-z\s.,-]+)", val)
         if m:
             # <Country>: <City>
             # <State>: <City>
@@ -205,7 +205,7 @@ class Locale:
 
         # Abc XX,  (no colon)
         # XX might be a state, province or country code
-        m=re.match("([A-Za-z\s.,-]+)[,\s]([A-Z]{2})", val)
+        m=re.match(r"([A-Za-z\s.,-]+)[,\s]([A-Z]{2})", val)
         if m:
             first=m.groups()[0].strip()
             second=m.groups()[1].strip()
@@ -227,7 +227,7 @@ class Locale:
 
         # <Country>:<City>
         # Abc:Abc where the first token is a known country
-        m=re.match("([A-Za-z\s]+):([A-Za-z\s.,-]+)", val)
+        m=re.match(r"([A-Za-z\s]+):([A-Za-z\s.,-]+)", val)
         if m:
             first=m.groups()[0].strip()
             second=m.groups()[1].strip()
