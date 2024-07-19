@@ -172,6 +172,28 @@ class Locale:
             'Yukon': 'YT'
         }
 
+        def FunnyLetterMatch(pattern: str, s: str) -> list[str] | None:
+            # Create a copy of s with all the characters mapped to the casefold() equivalent, but without loss of case
+            sfolded=s.casefold()
+            assert len(s) == len(sfolded)
+            for c, c1 in zip(s, sfolded):
+                if c.isupper():
+                    c1=c1.upper()
+            # Now attempt to match the pattern against sfolded
+            m=re.match(pattern, sfolded)
+            if m is None:
+                return None
+
+            # Create a list of matched strings taken from s
+            output=[]
+            for i in range(len(m.groups())):
+                output.append(s[m.start(i): m.end(i)])
+
+            return output
+
+
+
+
 
         # <Country>:<City> <State>
         # First look to see if it is of the form abc: def XX, where XX is two UC letters.
@@ -181,6 +203,8 @@ class Locale:
             self._state=m.groups()[2].strip()
             self._city=m.groups()[1].strip()
             return
+
+        out=FunnyLetterMatch(r"([a-zA-Z\s.]{2,99}):([A-Za-z\s.,-]+) ([A-Z]{2})", val)
 
         # XX:abc, where XX is two UC letters.
         # XX might be a state, province or country code
@@ -224,6 +248,8 @@ class Locale:
                 self._country=JustPlainCountries[second]
                 self._city=first
                 return
+        out=FunnyLetterMatch(r"([A-Za-z\s.,-]+)[,\s]([A-Z]{2})", val)
+        i=0
 
         # <Country>:<City>
         # Abc:Abc where the first token is a known country
@@ -245,6 +271,8 @@ class Locale:
                 self._state=provincesDict[first]
                 self._city=second
                 return
+        out=FunnyLetterMatch(r"([A-Za-z\s]+):([A-Za-z\s.,-]+)", val)
+        i=0
 
         statesTuples=[("AL", "Alabama"), ("AK", "Alaska"), ("AZ", "Arizona"), ("AR", "Arkansas"), ("CA", "California"), ("CO", "Colorado"),
                       ("CT", "Connecticut"), ("DC", "Washington DC"), ("DE", "Delaware"), ("FL", "Florida"), ("GA", "Georgia"),
