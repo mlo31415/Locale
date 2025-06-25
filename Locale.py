@@ -92,6 +92,7 @@ class Locale:
                             "Belgium": "Belgium",
                             "BE": "Belgium",
                             "Brazil": "Brazil",
+                            "Bulgaria": "Bulgaria",
                             "Canada": "Canada",
                             "CANADA": "Canada",
                             "CA": "Canada",
@@ -111,9 +112,12 @@ class Locale:
                             "Ireland": "Ireland",
                             "IE": "Ireland",
                             "Israel": "Israel",
+                            "Italy": "Italy",
+                            "IT": "Italy",
                             "Japan": "Japan",
                             "JP": "Japan",
                             "MX": "Mexico",
+                            "Multinational": "Multinational",
                             "Netherlands": "Netherlands",
                             "NL": "Netherlands",
                             "New Zealand": "NZ",
@@ -122,6 +126,8 @@ class Locale:
                             "NI": "UK",
                             "Norway": "Norway",
                             "NO": "Norway",
+                            "Pakistan": "Pakistan",
+                            "PK": "Pakistan",
                             "Poland": "Poland",
                             "PL": "Poland",
                             "Sweden": "Sweden",
@@ -190,9 +196,6 @@ class Locale:
                 output.append(s[m.start(i): m.end(i)])
 
             return output
-
-
-
 
 
         # <Country>:<City> <State>
