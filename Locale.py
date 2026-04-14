@@ -5,7 +5,7 @@ import re
 from Log import Log, LogError
 
 class Locale:
-    def __init__(self, rawtext:str):
+    def __init__(self, rawtext:str) -> None:
         self._rawString=""
         self._country=""
         self._state=""
@@ -26,7 +26,7 @@ class Locale:
             return self._country == other._country and self._state == other._state and self._city == other._city and self._weirdo == other._weirdo
         return True
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         if self._country != "" or self._state != "" or self._city != "" or self._weirdo != "":
             return hash(self._country)+hash(self._state)+hash(self._city)+hash(self._weirdo)+hash(self._rawString)
         return hash(self._rawString)
